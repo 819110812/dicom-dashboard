@@ -7,12 +7,27 @@ import { InboxOutlined } from '@ant-design/icons';
 class MainPage extends Component{
 
 
+
     render() {
+        const handleUpload = (option) => {
+            try {
+                // 使用第三方服务进行文件上传
+
+                // const result = await uploadService.upload(file)
+                console.log(1)
+                // onSuccess的回调参数可以在 UploadFile.response 中获取
+                // option.onSuccess(result.url)
+                option.onSuccess("http://localhost")
+            } catch (error) {
+                option.onError(error)
+            }
+        }
         const { Dragger } = Upload;
         const props = {
             name: 'file',
             multiple: true,
-            action: 'http://localhost:5985',
+            // action: '/files',
+            customRequest: {handleUpload},
             onChange(info) {
                 const { status } = info.file;
                 if (status !== 'uploading') {
